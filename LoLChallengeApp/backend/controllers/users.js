@@ -1,12 +1,13 @@
 /* 
 ---------------------------------------------------------------------------------------
-NOTE: Remember that all routes on this page are prefixed with `localhost:3000/api/users`
+NOTE: Remember that all routes on this page are prefixed with `localhost:3000/users`
 ---------------------------------------------------------------------------------------
 */
 
 
 /* Require modules
 --------------------------------------------------------------- */
+const jwt = require('jwt-simple')
 const express = require('express')
 // Router allows us to handle routing outisde of server.js
 const router = express.Router()
@@ -16,12 +17,26 @@ const router = express.Router()
 --------------------------------------------------------------- */
 const db = require('../models')
 
+/* Require the JWT config
+--------------------------------------------------------------- */
+const config = require('../../jwt.config.js')
 
 /* Routes
 --------------------------------------------------------------- */
 // Index Route (GET/Read): Will display all users
+router.get('/', function (req, res) {
+    db.User.find()
+        .then(users => {
+            for (user in users) {
+                console.log(users[user].id)
+            }
+            res.json(users)
+        })
+})
+
+// Index Route (GET/Read): Will display all users
 router.get('/:userId', function (req, res) {
-    db.User.find({ artworkId: req.params.artworkId })
+    db.User.find({ userId: req.params.userId })
         .then(users => res.json(users))
 })
 
@@ -32,6 +47,43 @@ router.post('/', (req, res) => {
     db.User.create(req.body)
         .then(user => res.json(user))
 })
+
+// SIGN UP REOUTE (CREATE USER)
+router.post('/signup', (req, res) => {
+    db.User.create(req.body)
+        .then(user => {
+            console.log(user)
+            const token = jwt.encode({ id: user.id }, process.env.SECRET)
+            res.json({ token: token })
+        })
+        .catch(() => {
+            res.sendStatus(401)
+            console.log('error 401')
+        })
+})
+
+// LOG IN (log into a user account)
+router.post('/login', async (req, res) => {
+    // attempt to find the user by their email in the database
+    const foundUser = await db.User.findOne({ email: req.body.email })
+    // check to:
+    // 1. make sure the user was found in the database
+    // 2. make sure the user entered in the correct password
+    if (foundUser && foundUser.password === req.body.password) {
+        // if the above applies, send the JWT to the browser
+        const payload = { id: foundUser.id }
+        const token = jwt.encode(payload, config.jwtSecret)
+        res.json({
+            token: token,
+            email: foundUser.email
+        })
+        console.log('User sucessfully logged in!')
+        // if the user was not found in the database OR their password was incorrect, send an error
+    } else {
+        res.sendStatus(401)
+    }
+})
+
 
 // Show Route (GET/Read): Will display an individual user document
 // using the URL parameter (which is the document _id)
