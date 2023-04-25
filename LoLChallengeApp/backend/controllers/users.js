@@ -108,7 +108,7 @@ router.put('/:id', (req, res) => {
 // using the URL parameter (which will always be the user document's ID)
 router.delete('/:id', (req, res) => {
     db.User.findByIdAndRemove(req.params.id)
-        .then(() => res.send('You deleted user ' + req.params.id))
+        .then(() => res.redirect(`/users/`))
 })
 
 

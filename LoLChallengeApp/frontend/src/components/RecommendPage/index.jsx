@@ -34,27 +34,12 @@ export default function RecommendPage (getData) {
         console.log('beginning of userChallContent')
         console.log(userChallengeData.challenges)
         let abc = userChallengeData.challenges
-        userChallContent = abc.map((thing, i) => {
-                console.log(thing)
-                return (
-                    <div key={i}>
-                        <i>{thing.achievedTime}</i>
-                        <i>{thing.challengeId}</i>
-                        <i>{thing.level}</i>
-                        <i>{thing.percentile}</i>
-                        <i>{thing.value}</i>
-                    </div>
-                )
-            })
+        userChallContent = abc.map((thing, i) => { <Recommendation key={i} challengeData={thing} /> })
     }
 
     return (
         <>
         <h1>Recommend Page</h1>
-        <ol>
-            <li><Recommendation /></li>
-            <li><Recommendation /></li>
-        </ol>
         <form onSubmit={getUserChallengeData}>
             <label>
                 Enter your PUUID:
@@ -69,7 +54,7 @@ export default function RecommendPage (getData) {
             <br />
             <input type="submit" value="Submit" />
         </form>
-        <p>{userChallContent}</p>
+        <div>{userChallContent}</div>
         </>
     )
 }
