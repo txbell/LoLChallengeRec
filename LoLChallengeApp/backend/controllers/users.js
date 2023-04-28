@@ -54,6 +54,7 @@ router.post('/signup', (req, res) => {
         .then(user => {
             console.log(user)
             const token = jwt.encode({ id: user.id }, process.env.SECRET)
+            console.log(token)
             res.json({ token: token })
         })
         .catch(() => {
@@ -73,6 +74,8 @@ router.post('/login', async (req, res) => {
         // if the above applies, send the JWT to the browser
         const payload = { id: foundUser.id }
         const token = jwt.encode(payload, config.jwtSecret)
+        console.log("token" + token)
+        console.log("payload" + payload)
         res.json({
             token: token,
             email: foundUser.email

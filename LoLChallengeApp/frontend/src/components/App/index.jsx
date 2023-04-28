@@ -1,28 +1,46 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import HomePage from '../HomePage'
 import RecommendPage from '../RecommendPage'
 import LoginPage from '../LoginPage'
-import SignupPage from '../SignupPage'
+import UserPage from '../UserPage'
 import './style.css'
 import { getData } from '../../utils/api'
 
 function App() {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [puuid, setPuuid] = useState();
+  const [gameName, setGameName] = useState();
+  const [tagLine, setTagLine] = useState();
+
+  useEffect(() => {
+    setTagLine('NA1')
+  }, [])
+
   return (
   <>
     <div className="navBar">
       <h1>LoL Challenge</h1>
       <a href='/recommend'>Recommend</a>
       <a href='/'>Home</a>
-      <a href='/login'>Login</a>
-      <a href='/signup'>Signup</a>
+      <Link to="/auth/signup">
+        <h4 className="px-3 py-2 hover:text-white">Sign Up</h4>
+      </Link>
+      <Link to="/auth/login">
+        <h4 className="px-3 py-2 hover:text-white">Log In</h4>
+      </Link>
+      <Link to="/user">
+        <h4 className="px-3 py-2 hover:text-white">User</h4>
+      </Link>
     </div>
 
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/recommend" element={<RecommendPage getData={getData} />} />
-      <Route path='/login' element={<LoginPage />} />
-      <Route path='/signup' element={<SignupPage />} />
+      <Route path="/recommend" element={<RecommendPage getData={getData} puuid={puuid} setPuuid={setPuuid} tagLine={tagLine} setTagLine={setTagLine} gameName={gameName} setGameName={setGameName} />} />
+      <Route path='/auth/login' element={<LoginPage locc='login' setEmail={setEmail} setPassword={setPassword} />} />
+      <Route path='/auth/signup' element={<LoginPage locc='signup' />} />
+      <Route path='/user' element={<UserPage email={email} password={password} setPuuid={setPuuid} puuid={puuid} gameName={gameName} setGameName={setGameName} tagLine={tagLine} setTagLine={setTagLine} />} />
     </Routes>
   </>
   );

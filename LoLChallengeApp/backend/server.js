@@ -29,8 +29,29 @@ app.use(express.json())
 --------------------------------------------------------------- */
 // This tells our app to look at the `controllers/comments.js` file 
 // to handle all routes that begin with `localhost:3000/api/applications`
-app.use('/users', usersCtrl)
+app.use('/api/users', usersCtrl)
 
+// When a GET request is sent to `/seed`, the products collection is seeded
+app.get('/seed', function (req, res) {
+    console.log(db.seedChallenges)
+    // Remove any existing products
+    db.Challenge.deleteMany({})
+        .then(removedProducts => {
+            console.log(`Removed ${removedProducts} products`)
+
+            // Seed the products collection with the seed data
+            db.Challenge.insertMany(db.seedChallenges)
+                .then(addedProducts => {
+                    console.log(`Added ${addedProducts.length} products to be adopted`)
+                    res.json(addedProducts)
+                })
+        })
+});
+
+app.get('/api/challenge/:challengeId', function (req, res) {
+    db.Challenge.find({ id: req.params.challengeId })
+        .then(challenge => res.json(challenge))
+})
 
 /* Tell the app to listen on the specified port
 --------------------------------------------------------------- */

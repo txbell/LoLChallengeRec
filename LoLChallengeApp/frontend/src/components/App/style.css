@@ -1,5 +1,46 @@
+:root {
+  --backgroundVar: #2fc7f1;
+  --navColor: #2f90f1;
+  --cardColor: #2f32f1;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--navColor);
+  height: 60px;
+  padding: 0 20px;
+}
+
+.recPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  background-color: var(--backgroundVar);
+  height: 100vh;
+}
+
+.Card {
+  background-color: var(--cardColor);
+  color: white;
+  text-align: center;
+  margin: 10px;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.recForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--backgroundVar);
 }

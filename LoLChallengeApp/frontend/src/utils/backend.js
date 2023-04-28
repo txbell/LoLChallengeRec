@@ -3,26 +3,36 @@ import axios from 'axios';
 const authHeader = { headers: { 'Authorization': localStorage.getItem('userToken') } };
 
 export async function getUser(userId) {
-  const response = await axios.get(`/users/${userId}`);
-  return response;
-}
-
-export async function signUp(data) {
-  const response = await axios.post('/users/signup', data);
+  const response = await axios.get(`/api/users/${userId}`);
   return response;
 }
 
 export async function updateUser(userId, data) {
-  const response = await axios.put(`/users/${userId}`, data);
+  const response = await axios.put(`/api/users/${userId}`, data);
   return response;
 }
 
 export async function deleteUser(userId) {
-  const {response} = await axios.delete(`/users/${userId}`);
+  const {response} = await axios.delete(`/api/users/${userId}`);
   return response;
 }
 
 export async function logIn(data) {
-  const {response} = await axios.put('/users/login', data);
+  const {response} = await axios.post('/api/users/login', data);
+  return response;
+}
+
+export async function signUp(data) {
+    const response = await axios.post('/api/users/signup', data);
+    return response;
+  }
+
+export async function setSeed(data) {
+    const response = await axios.post('/api/seed', data);
+    return response;
+  }
+
+export async function getChallenge(challengeId) {
+  const response = await axios.get(`/api/challenge/${challengeId}`);
   return response;
 }
