@@ -42,6 +42,7 @@ export default function RecommendPage (props) {
         console.log(data)
         setUserChallengeData(data)
         console.log('userChallengeData set')
+        return data
     }
 
     let textArray = ['test']
@@ -74,13 +75,14 @@ export default function RecommendPage (props) {
         </form>
     )
 
-    const rankChallenges = async (event) => {
+    const rankChallenges = async (event, data) => {
         textArray = ['Loading...']
         const challArr = []
         const completedArr = []
         console.log('rankChallenges')
         console.log(userChallengeData.challenges)
-        userChallengeData.challenges.map(challenge => {
+        console.log(data.challenges)
+        data.challenges.map(challenge => {
             getChallenge(challenge.challengeId)
             .then(baseChall => {
                 let remaining = 0
@@ -126,29 +128,28 @@ export default function RecommendPage (props) {
         })
     }
 
-    if (userChallengeData) {
+    // if (userChallengeData) {
 
-        rankChallenges()
-        // .then(() => {
-        console.log('beginning of userChallContent')
-        console.log(userChallengeData.challenges)
-        let abc = userChallengeData.challenges
-        // userChallContent = abc.map((thing, i) => { <Recommendation key={i} challengeData={thing} /> })
-        // })
-    }
+    //     rankChallenges()
+    //     // .then(() => {
+    //     console.log('beginning of userChallContent')
+    //     console.log(userChallengeData.challenges)
+    //     let abc = userChallengeData.challenges
+    //     // userChallContent = abc.map((thing, i) => { <Recommendation key={i} challengeData={thing} /> })
+    //     // })
+    // }
 
-    const startThing = async (event) => {
-        event.preventDefault()
+    function startThing (event) {
         getUserChallengeData(event)
-        .then(() => {
-            rankChallenges(event)
+        .then(data => {
+            rankChallenges(event, data)
         })
     }
 
     return (
         <div className="recPage">
         <h1>Recommend Page</h1>
-        <form onSubmit={getUserChallengeData} className="recForm">
+        <form onSubmit={startThing} className="recForm">
             <label>
                 Enter your PUUID:
                 <input 
