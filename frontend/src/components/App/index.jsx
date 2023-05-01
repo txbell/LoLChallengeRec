@@ -22,16 +22,16 @@ function App() {
   <>
     <div className="navBar">
       <h1>LoL Challenge</h1>
-      <a href='/recommend'>Recommend</a>
-      <a href='/'>Home</a>
+      <a className='link' href='/recommend'>Recommend</a>
+      <a className='link' href='/'>Home</a>
       <Link to="/auth/signup">
-        <h4 className="px-3 py-2 hover:text-white">Sign Up</h4>
+        <h4 className="px-3 py-2 hover:text-white link">Sign Up</h4>
       </Link>
       <Link to="/auth/login">
-        <h4 className="px-3 py-2 hover:text-white">Log In</h4>
+        <h4 className="px-3 py-2 hover:text-white link">Log In</h4>
       </Link>
       <Link to="/user">
-        <h4 className="px-3 py-2 hover:text-white">User</h4>
+        <h4 className="px-3 py-2 hover:text-white link">User</h4>
       </Link>
     </div>
 

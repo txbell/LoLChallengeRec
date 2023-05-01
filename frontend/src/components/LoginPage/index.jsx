@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { signUp, logIn } from "../../utils/backend"
+import { useEffect } from "react";
 
 export default function LoginPage(props) {
     const [formData, setFormData] = useState({

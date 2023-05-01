@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function UserPage(props) {
     
     let body = null
     let uhPuuid = null
+
+
+    useEffect(() => {
+        console.log(`token: ${localStorage.getItem('userToken')}`)
+    }, [])
 
     if (props.puuid === undefined) {
         uhPuuid = (
