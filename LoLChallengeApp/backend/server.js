@@ -24,12 +24,22 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 
+// use the React build folder for static files
+app.use(express.static(path.join(path.dirname(__dirname), 'frontend', 'dist')))
+
 
 /* Mount routes
 --------------------------------------------------------------- */
 // This tells our app to look at the `controllers/comments.js` file 
 // to handle all routes that begin with `localhost:3000/api/applications`
 app.use('/api/users', usersCtrl)
+
+// Any other route not matching the routes above gets routed by React
+app.get('*', (req, res) => {
+    console.log('sending to react')
+    res.sendFile(path.join(path.dirname(__dirname), 'frontend', 'dist', 'index.html'));
+});
+
 
 // When a GET request is sent to `/seed`, the products collection is seeded
 app.get('/seed', function (req, res) {
