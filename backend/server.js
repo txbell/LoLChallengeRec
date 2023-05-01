@@ -34,13 +34,6 @@ app.use(express.static(path.join(path.dirname(__dirname), 'frontend', 'dist')))
 // to handle all routes that begin with `localhost:3000/api/applications`
 app.use('/api/users', usersCtrl)
 
-// Any other route not matching the routes above gets routed by React
-app.get('*', (req, res) => {
-    console.log('sending to react')
-    res.sendFile(path.join(path.dirname(__dirname), 'frontend', 'dist', 'index.html'));
-});
-
-
 // When a GET request is sent to `/seed`, the products collection is seeded
 app.get('/seed', function (req, res) {
     console.log(db.seedChallenges)
@@ -62,6 +55,13 @@ app.get('/api/challenge/:challengeId', function (req, res) {
     db.Challenge.find({ id: req.params.challengeId })
         .then(challenge => res.json(challenge))
 })
+
+
+// Any other route not matching the routes above gets routed by React
+app.get('*', (req, res) => {
+    console.log('sending to react')
+    res.sendFile(path.join(path.dirname(__dirname), 'frontend', 'dist', 'index.html'));
+});
 
 /* Tell the app to listen on the specified port
 --------------------------------------------------------------- */

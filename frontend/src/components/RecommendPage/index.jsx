@@ -85,6 +85,7 @@ export default function RecommendPage (props) {
         data.challenges.map(challenge => {
             getChallenge(challenge.challengeId)
             .then(baseChall => {
+                console.log(baseChall)
                 let remaining = 0
                 for (let i = 0; i < Object.entries(baseChall.data[0].thresholds).length; i++) {
                     if ((Object.entries(baseChall.data[0].thresholds)[i][1] - challenge.value) === 0) {
