@@ -38,9 +38,9 @@ export default function UserPage(props) {
     } else {
         body = (
         <>
-        <h2>{props.email}</h2>
-        <h2>{props.password}</h2>
-        <h2>{uhPuuid}</h2>
+        <h2 className="userInfo" id="email">Email: {props.email}</h2>
+        <h2 className="userInfo" id="pword">Password: {props.password}</h2>
+        <h2 className="userInfo" id="puuid">Puuid: {uhPuuid}</h2>
         </>
         )
     }

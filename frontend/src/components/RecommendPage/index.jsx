@@ -8,15 +8,15 @@ export default function RecommendPage (props) {
     const [userChallContent, setUserChallContent] = useState([])
 
     // CORS error so seeding instead
-    // const getGeneralChallengeData = async (event) => {
-    //     console.log('getGeneralChallengeData')
-    //     const res = await fetch(`https://na1.api.riotgames.com/lol/challenges/v1/config?api_key=${import.meta.env.VITE_RITO_KEY}`)
-    //     console.log(res)
-    //     const apiResponse = await res.json()
-    //     const data = apiResponse
-    //     console.log(data)
-    //     setGeneralChallengeData(data)
-    // }
+    const getGeneralChallengeData = async (event) => {
+        console.log('getGeneralChallengeData')
+        const res = await fetch(`https://na1.api.riotgames.com/lol/challenges/v1/challenges/config?api_key=${import.meta.env.VITE_RITO_KEY}`)
+        console.log(res)
+        const apiResponse = await res.json()
+        const data = apiResponse
+        console.log(data)
+        setGeneralChallengeData(data)
+    }
     // useEffect(() => {
     // getGeneralChallengeData()
     // }, [])
@@ -93,7 +93,9 @@ export default function RecommendPage (props) {
                         remaining = (Object.entries(baseChall.data[0].thresholds)[i][1] - challenge.value)
                         let comparisonObj = {
                             challengeId: challenge.challengeId,
-                            points: challenge.value,
+                            value: challenge.value,
+                            level: challenge.level,
+                            percentile: challenge.percentile,
                             remaining: remaining,
                         }
                         completedArr.push(comparisonObj)
@@ -119,7 +121,7 @@ export default function RecommendPage (props) {
                     // challArr.map((thing, i) => {
                     //     userChallContent.push(<Recommendation key={i} challengeData={thing} />)
                     // })
-                    for (let i = 0; i < 5; i++) {
+                    for (let i = 0; i < 15; i++) {
                         userContent.push(<Recommendation key={i} challengeData={challArr[i]} />)
                     }
                     console.log(userContent)
@@ -166,7 +168,7 @@ export default function RecommendPage (props) {
             <input type="submit" value="Submit" />
         </form>
         {/* {nameForm} */}
-        <div>{userChallContent}</div>
+        <div className="theStuff">{userChallContent}</div>
         {/* <div>{textArray}</div> */}
         </div>
     )

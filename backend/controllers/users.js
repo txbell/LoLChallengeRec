@@ -50,6 +50,8 @@ router.post('/', (req, res) => {
 
 // SIGN UP REOUTE (CREATE USER)
 router.post('/signup', (req, res) => {
+    console.log('signing up')
+    console.log(req.body)
     db.User.create(req.body)
         .then(user => {
             console.log(user)
@@ -65,6 +67,7 @@ router.post('/signup', (req, res) => {
 
 // LOG IN (log into a user account)
 router.post('/login', async (req, res) => {
+    console.log('logging in')
     // attempt to find the user by their email in the database
     const foundUser = await db.User.findOne({ email: req.body.email })
     // check to:

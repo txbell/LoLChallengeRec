@@ -26,7 +26,9 @@ async function handleSubmit(event) {
         const { token } = await signUp(formData)
         localStorage.setItem('userToken', token)
     }
+    console.log(`setEmail: ${formData.email}`)
     props.setEmail(formData.email)
+    console.log(`setPassword: ${formData.password}`)
     props.setPassword(formData.password)
     // redirect to the home page after signing/logging in
     navigate('/user')
