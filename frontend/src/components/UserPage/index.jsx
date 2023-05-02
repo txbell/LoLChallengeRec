@@ -23,10 +23,17 @@ export default function UserPage(props) {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
+let delee = false
     // Execute auth logic on form submit
 async function handleSubmit(event) {
     // prevent the page from refreshing when the form is submitted
     event.preventDefault()
+    if (delee === true) {
+        console.log('deleting User data')
+        const aaa = await deleteUser(props.userId).then((response) => {
+        navigate('/')
+        })
+    } else {
     console.log(props.email)
     // check what the URL parameter is to determine what request to make
     console.log(props.id, formData)
@@ -38,6 +45,7 @@ async function handleSubmit(event) {
     props.setPassword(formData.password)
     // redirect to the home page after signing/logging in
     navigate('/user')
+    }
 }
 
     useEffect(() => {
@@ -49,12 +57,19 @@ async function handleSubmit(event) {
         console.log('get User data')
         getUserData()
     }, [])
-
-async function deleteUser() {
-    console.log('deleting User data')
-    const ooo = deleteUser(props.userId)
-    navigate('/')
-}
+ let ddd = 0
+    async function deleteUser(event) {
+        // prevent the page from refreshing when the form is submitted
+        event.preventDefault()
+        // console.log(ddd)
+        // if (ddd === 0) {
+            // ddd === 1
+            console.log('deleting User data')
+            const aaa = await deleteUser(props.userId).then((response) => {
+            navigate('/')
+        })
+    // }
+    }
 
 async function getUserData() {
 
@@ -122,9 +137,20 @@ async function getUserData() {
             <br />
             <input type="submit" value="Submit" />
         </form>
-        <form onSubmit={deleteUser}>
+        {/* <form onSubmit={deleteUser}>
+            <label
+                onClick={() => {
+                    delee = true
+                }}
+            >
+                Delete your account:
+            </label>
+            <br />
             <input type="submit" value="Delete Account" />
-        </form>
+        </form> */}
+        <button onClick={() => {
+            deleteUser()
+        }}>Delete Account</button>
         </>
         )
     }
