@@ -39,7 +39,7 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/recommend" element={<RecommendPage getData={getData} puuid={puuid} setPuuid={setPuuid} tagLine={tagLine} setTagLine={setTagLine} gameName={gameName} setGameName={setGameName} />} />
       <Route path='/auth/login' element={<LoginPage locc='login' setEmail={setEmail} setPassword={setPassword} />} />
-      <Route path='/auth/signup' element={<LoginPage locc='signup' />} />
+      <Route path='/auth/signup' element={<LoginPage locc='signup' setEmail={setEmail} setPassword={setPassword} />} />
       <Route path='/user' element={<UserPage email={email} password={password} setPuuid={setPuuid} puuid={puuid} gameName={gameName} setGameName={setGameName} tagLine={tagLine} setTagLine={setTagLine} />} />
     </Routes>
   </>

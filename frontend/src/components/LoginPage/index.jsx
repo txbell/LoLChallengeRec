@@ -4,6 +4,7 @@ import { signUp, logIn } from "../../utils/backend"
 import { useEffect } from "react";
 
 export default function LoginPage(props) {
+    console.log(props)
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -12,6 +13,7 @@ export default function LoginPage(props) {
     const navigate = useNavigate();
 
     const handleInputChange = (event) => {
+        console.log(props)
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 

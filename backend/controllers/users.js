@@ -55,7 +55,7 @@ router.post('/signup', (req, res) => {
     db.User.create(req.body)
         .then(user => {
             console.log(user)
-            const token = jwt.encode({ id: user.id }, process.env.SECRET)
+            const token = jwt.encode({ id: user.id }, config.jwtSecret)
             console.log(token)
             res.json({ token: token })
         })

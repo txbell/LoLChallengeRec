@@ -27,6 +27,7 @@ Signup Page:
 ## Installation Instructions
 - Use NPM do download all the dependencies
 - Run 'NPM run frontend' to run the frontend, and 'NPM run backend' to run the backend
+- Example PUUID to test reccomend function: 7jSZliOy4RAQh1lRrWMH8aHF17eHzq64WJq3jlva2KTuNqMKCKxYt8Qe7avwLCBRhBEdb1O53KO7qw
 
 ## Wireframes
 ![Screen Shot 2023-04-20 at 4 11 46 PM](https://media.git.generalassemb.ly/user/47681/files/72735afd-3b8f-4ca8-93cd-7a61a6add37c)
