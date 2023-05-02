@@ -13,6 +13,7 @@ function App() {
   const [puuid, setPuuid] = useState();
   const [gameName, setGameName] = useState();
   const [tagLine, setTagLine] = useState();
+  const [userId, setUserId] = useState();
 
   useEffect(() => {
     setTagLine('NA1')
@@ -38,9 +39,9 @@ function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/recommend" element={<RecommendPage getData={getData} puuid={puuid} setPuuid={setPuuid} tagLine={tagLine} setTagLine={setTagLine} gameName={gameName} setGameName={setGameName} />} />
-      <Route path='/auth/login' element={<LoginPage locc='login' setEmail={setEmail} setPassword={setPassword} />} />
-      <Route path='/auth/signup' element={<LoginPage locc='signup' setEmail={setEmail} setPassword={setPassword} />} />
-      <Route path='/user' element={<UserPage email={email} password={password} setPuuid={setPuuid} puuid={puuid} gameName={gameName} setGameName={setGameName} tagLine={tagLine} setTagLine={setTagLine} />} />
+      <Route path='/auth/login' element={<LoginPage locc='login' setEmail={setEmail} setPassword={setPassword} setUserId={setUserId} />} />
+      <Route path='/auth/signup' element={<LoginPage locc='signup' setEmail={setEmail} setPassword={setPassword} setUserId={setUserId} />} />
+      <Route path='/user' element={<UserPage userId={userId} email={email} password={password} setEmail={setEmail} setPassword={setPassword} setPuuid={setPuuid} puuid={puuid} gameName={gameName} setGameName={setGameName} tagLine={tagLine} setTagLine={setTagLine} />} />
     </Routes>
   </>
   );

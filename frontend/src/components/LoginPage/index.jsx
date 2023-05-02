@@ -4,7 +4,7 @@ import { signUp, logIn } from "../../utils/backend"
 import { useEffect } from "react";
 
 export default function LoginPage(props) {
-    console.log(props)
+    // console.log(props)
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -13,7 +13,7 @@ export default function LoginPage(props) {
     const navigate = useNavigate();
 
     const handleInputChange = (event) => {
-        console.log(props)
+        // console.log(props)
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
@@ -21,10 +21,15 @@ export default function LoginPage(props) {
 async function handleSubmit(event) {
     // prevent the page from refreshing when the form is submitted
     event.preventDefault()
+    console.log(formData)
+    console.log(props.locc)
     // check what the URL parameter is to determine what request to make
     if (props.locc === 'login') {
-        const token = await logIn(formData)
-        localStorage.setItem('userToken', token)
+        const food = await logIn(formData).then((response) => {
+        
+        localStorage.setItem('userToken', response.token)
+        props.setUserId(response.id)
+        })
     } else {
         const { token } = await signUp(formData)
         localStorage.setItem('userToken', token)

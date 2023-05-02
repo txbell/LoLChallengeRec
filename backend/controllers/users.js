@@ -77,11 +77,13 @@ router.post('/login', async (req, res) => {
         // if the above applies, send the JWT to the browser
         const payload = { id: foundUser.id }
         const token = jwt.encode(payload, config.jwtSecret)
-        console.log("token" + token)
-        console.log("payload" + payload)
+        console.log("token " + token)
+        console.log("payload " + payload)
+        console.log("foundUser " + foundUser)
         res.json({
             token: token,
-            email: foundUser.email
+            email: foundUser.email,
+            id: foundUser.id
         })
         console.log('User sucessfully logged in!')
         // if the user was not found in the database OR their password was incorrect, send an error
@@ -93,15 +95,21 @@ router.post('/login', async (req, res) => {
 
 // Show Route (GET/Read): Will display an individual user document
 // using the URL parameter (which is the document _id)
-router.get('/:id', function (req, res) {
-    db.User.findById(req.params.id)
-        .then(user => res.json(user))
+router.get('/:email', function (req, res) {
+    console.log(req.params.email)
+    db.User.find({ email: req.params.email })
+        .then(user => {
+            console.log(user)
+            res.json(user)
+        })
 })
 
 // Update Route (PUT/Update): This route receives the PUT request sent from the edit route, 
 // edits the specified user document using the form data,
 // and redirects the user back to the show page for the updated location.
 router.put('/:id', (req, res) => {
+    console.log(req.body)
+    console.log(req.params.id)
     db.User.findByIdAndUpdate(
         req.params.id,
         req.body,
@@ -113,8 +121,9 @@ router.put('/:id', (req, res) => {
 // Destroy Route (DELETE/Delete): This route deletes a user document 
 // using the URL parameter (which will always be the user document's ID)
 router.delete('/:id', (req, res) => {
+    console.log('deleting user')
     db.User.findByIdAndRemove(req.params.id)
-        .then(() => res.redirect(`/users/`))
+        .then(() => res.redirect(`/`))
 })
 
 

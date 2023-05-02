@@ -7,8 +7,8 @@ export async function getUser(userId) {
   return response;
 }
 
-export async function updateUser(userId, data) {
-  const response = await axios.put(`/api/users/${userId}`, data);
+export async function updateUser(data, id) {
+  const response = await axios.put(`/api/users/${id}`, data);
   return response;
 }
 
@@ -18,8 +18,8 @@ export async function deleteUser(userId) {
 }
 
 export async function logIn(data) {
-  const {response} = await axios.post('/api/users/login', data);
-  return response;
+  const response = await axios.post('/api/users/login', data);
+  return response.data;
 }
 
 export async function signUp(data) {
