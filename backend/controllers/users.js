@@ -124,7 +124,7 @@ router.delete('/:id', (req, res) => {
     console.log('deleting user')
     console.log(req.params.id)
     db.User.findByIdAndRemove(req.params.id)
-        .then(() => res.redirect(`/`))
+        .then(() => res.json({ message: 'User deleted' }))
 })
 
 

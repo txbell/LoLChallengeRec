@@ -13,6 +13,7 @@ export async function updateUser(data, id) {
 }
 
 export async function deleteUser(userId) {
+  console.log('dele' + userId)
   const {response} = await axios.delete(`/api/users/${userId}`);
   return response;
 }

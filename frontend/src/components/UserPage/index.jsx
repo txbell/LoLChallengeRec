@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react'
-import { getUser, updateUser } from "../../utils/backend";
+import { getUser, updateUser, deleteUser } from "../../utils/backend";
 
 export default function UserPage(props) {
 
@@ -58,18 +58,26 @@ async function handleSubmit(event) {
         getUserData()
     }, [])
  let ddd = 0
-    async function deleteUser(event) {
-        // prevent the page from refreshing when the form is submitted
-        event.preventDefault()
-        // console.log(ddd)
-        // if (ddd === 0) {
-            // ddd === 1
-            console.log('deleting User data')
-            const aaa = await deleteUser(props.userId).then((response) => {
+// async function deleteUser(e) {
+//     e.preventDefault();
+//         // console.log(ddd)
+//         // if (ddd === 0) {
+//             // ddd === 1
+//             console.log('deleting User data')
+//             console.log(props.userId)
+//             const aaa = await deleteUser(props.userId).then((response) => {
+//             // navigate('/')
+//         })
+//     // }
+//     }
+
+function handleDelete() {
+    console.log('deleting User data' + props.userId)
+    deleteUser(props.userId)
+        .then(() => {
             navigate('/')
         })
-    // }
-    }
+}
 
 async function getUserData() {
 
@@ -137,20 +145,9 @@ async function getUserData() {
             <br />
             <input type="submit" value="Submit" />
         </form>
-        {/* <form onSubmit={deleteUser}>
-            <label
-                onClick={() => {
-                    delee = true
-                }}
-            >
-                Delete your account:
-            </label>
-            <br />
-            <input type="submit" value="Delete Account" />
-        </form> */}
-        <button onClick={() => {
-            deleteUser()
-        }}>Delete Account</button>
+        <button onClick={handleDelete} >
+                Delete
+        </button>
         </>
         )
     }

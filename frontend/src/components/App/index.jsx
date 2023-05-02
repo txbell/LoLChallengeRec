@@ -35,9 +35,8 @@ function App() {
         <h4 className="px-3 py-2 hover:text-white link">User</h4>
       </Link>
     </div>
-
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<HomePage userId={userId} />} />
       <Route path="/recommend" element={<RecommendPage getData={getData} puuid={puuid} setPuuid={setPuuid} tagLine={tagLine} setTagLine={setTagLine} gameName={gameName} setGameName={setGameName} />} />
       <Route path='/auth/login' element={<LoginPage locc='login' setEmail={setEmail} setPassword={setPassword} setUserId={setUserId} />} />
       <Route path='/auth/signup' element={<LoginPage locc='signup' setEmail={setEmail} setPassword={setPassword} setUserId={setUserId} />} />
