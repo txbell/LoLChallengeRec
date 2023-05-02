@@ -113,3 +113,22 @@
   background-color: var(--backgroundVar);
   height: 90vh;
 }
+
+@media screen and (max-width: 800px) {
+  * {
+   font-size: 40px;
+  }
+  :root{
+    --backgroundVar: #e9541e;
+    --navColor: #f1d12f;
+    --cardColor: #f93e0f;
+  }
+  .homePage, .userInfo, .loginPage, .recPage{
+    flex-direction:column;
+    height: 60vh;
+  }
+  .navBar{
+    flex-direction:column;
+    height: 40vh;
+  }
+}
